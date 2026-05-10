@@ -1,44 +1,57 @@
-# Dantam Dental Portfolio Project
+# Dantam Dental Clinic
 
-This repository contains the Dantam Dental portfolio website, built as a modern, responsive landing page for a dental clinic brand. It serves as a portfolio-ready showcase of the UI, layout, animations, and frontend architecture used to build the site.
+## Overview
 
-## Project overview
+This repository contains the source code for the demo portfolio website of Dantam Dental Clinic, a modern web application showcasing contemporary design and functionality.
 
-Dantam Dental is designed as a polished portfolio project with:
+## Description
 
-- a responsive multi-section homepage
-- services, about, testimonials, and contact sections
-- mobile-first layout and smooth page transitions
-- reusable UI components and consistent design tokens
-- simple SPA routing and static deployment configuration
+This is a demo portfolio website built to demonstrate best practices in web development, featuring responsive design, interactive elements, and optimized performance.
 
-## What I built
+## Technologies Used
 
-This project was assembled using a clean frontend stack and custom UI primitives.
-
-- `src/pages` contains the main page routes
-- `src/components` contains shared sections like `Navbar`, `HeroSection`, `ServicesSection`, and `TestimonialsSection`
-- `src/components/ui` contains reusable elements from the design system
-- `src/hooks` contains reusable hooks for mobile behavior and toasts
-- `src/lib/utils.ts` contains helper utilities used in the app
-
-## Technology stack
-
-- React
 - Vite
 - TypeScript
+- React
 - Tailwind CSS
-- shadcn-ui style primitives
-- Framer Motion
-- React Router Dom
-- Lucide React
-- React Query
+- PostCSS
+- Other modern web technologies
 
-## File structure highlights
+## Getting Started
 
-- `src/main.tsx` launches the React app
-- `src/App.tsx` contains the main page layout and route handling
-- `src/pages` holds the landing page views
-- `src/components/ui` holds reusable design components
+### Prerequisites
 
-If you want to continue developing this portfolio app, the design is already set up for clean styling, fast builds, and good browser icon support.
+- Node.js (version 18 or higher)
+- Bun package manager
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd Dantam_Dental_Clinic
+   ```
+
+2. Install dependencies:
+   ```bash
+   bun install
+   ```
+
+3. Start the development server:
+   ```bash
+   bun run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173` (or the port specified by Vite).
+
+## Build
+
+To build the project for production:
+
+```bash
+bun run build
+```
+
+## License
+
+This project is for demonstration purposes only and is not licensed for commercial use.
