@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
@@ -9,27 +9,34 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Clock, Phone, Mail, Send } from "lucide-react";
 
-interface Appointment {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-  createdAt: string;
-}
-
 const Contact = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", phone: "", service: "", message: "" });
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    // Remove records written by older demo versions. Medical/contact data must
+    // never be retained in script-readable browser storage.
+    localStorage.removeItem("appointments");
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const phone = form.phone.trim();
+    const message = form.message.trim();
+    if (
+      name.length < 2 ||
+      name.length > 80 ||
+      email.length > 254 ||
+      phone.length > 20 ||
+      message.length > 1_000
+    ) {
+      toast({ title: "Please check your details", description: "One or more fields are invalid or too long." });
+      return;
+    }
     setLoading(true);
-    const existing: Appointment[] = JSON.parse(localStorage.getItem("appointments") || "[]");
-    const newAppointment: Appointment = { id: crypto.randomUUID(), ...form, createdAt: new Date().toISOString() };
-    localStorage.setItem("appointments", JSON.stringify([...existing, newAppointment]));
     setTimeout(() => {
       setLoading(false);
       setForm({ name: "", email: "", phone: "", service: "", message: "" });
@@ -102,10 +109,10 @@ const Contact = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="bg-card rounded-lg p-6 sm:p-8 shadow-elegant border border-border space-y-5">
-                <Input placeholder="Full Name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="bg-secondary border-border font-body" />
+                <Input placeholder="Full Name" required minLength={2} maxLength={80} autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="bg-secondary border-border font-body" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Input type="email" placeholder="Email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="bg-secondary border-border font-body" />
-                  <Input type="tel" placeholder="Phone (+91)" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="bg-secondary border-border font-body" />
+                  <Input type="email" placeholder="Email" required maxLength={254} autoComplete="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="bg-secondary border-border font-body" />
+                  <Input type="tel" placeholder="Phone (+91)" maxLength={20} autoComplete="tel" inputMode="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="bg-secondary border-border font-body" />
                 </div>
                 <select required value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className="w-full h-10 rounded-md border border-border bg-secondary px-3 text-sm font-body text-foreground focus:outline-none focus:ring-2 focus:ring-ring">
                   <option value="">Select Service</option>
@@ -119,7 +126,7 @@ const Contact = () => {
                   <option value="pediatric">Pediatric Dentistry</option>
                   <option value="other">Other</option>
                 </select>
-                <Textarea placeholder="Tell us about your dental needs..." value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="bg-secondary border-border font-body min-h-[100px]" />
+                <Textarea placeholder="Tell us about your dental needs..." maxLength={1000} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="bg-secondary border-border font-body min-h-[100px]" />
                 <Button type="submit" disabled={loading} className="w-full gradient-accent text-accent-foreground font-semibold text-base shadow-accent hover:opacity-90 transition-opacity" size="lg">
                   {loading ? "Sending..." : (<><Send className="w-4 h-4 mr-2" />Request Appointment</>)}
                 </Button>
