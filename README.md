@@ -1,57 +1,42 @@
 # Dantam Dental Clinic
 
-## Overview
+A modern dental-clinic portfolio presenting treatments, clinic information, testimonials, contact options, and consultation calls to action.
 
-This repository contains the source code for the demo portfolio website of Dantam Dental Clinic, a modern web application showcasing contemporary design and functionality.
+**Live website:** [dantamdentalclinic.vercel.app](https://dantamdentalclinic.vercel.app/)  
+**Repository:** [GrowthXCircle/dental-clinic-website](https://github.com/GrowthXCircle/dental-clinic-website)
 
-## Description
+## Highlights
 
-This is a demo portfolio website built to demonstrate best practices in web development, featuring responsive design, interactive elements, and optimized performance.
+- Home, services, about, testimonials, and contact pages
+- Responsive navigation and page transitions
+- Reusable form and notification components
+- Vitest test setup
 
-## Technologies Used
+## Technology
 
-- Vite
-- TypeScript
-- React
-- Tailwind CSS
-- PostCSS
-- Other modern web technologies
+React 18, TypeScript, React Router 7, TanStack Query, Vite 7, Tailwind CSS 3, Radix UI, Framer Motion, and Vitest.
 
-## Getting Started
+## Local development
 
-### Prerequisites
-
-- Node.js (version 18 or higher)
-- Bun package manager
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd Dantam_Dental_Clinic
-   ```
-
-2. Install dependencies:
-   ```bash
-   bun install
-   ```
-
-3. Start the development server:
-   ```bash
-   bun run dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:5173` (or the port specified by Vite).
-
-## Build
-
-To build the project for production:
+Node.js 22 or newer and npm are recommended.
 
 ```bash
-bun run build
+git clone https://github.com/GrowthXCircle/dental-clinic-website.git
+cd dental-clinic-website
+npm install
+npm run dev
 ```
 
-## Use as a template
+Create and preview a production build:
 
-You can use this code as a template for building your own website. Replace the demo branding, content, contact details, and images before publishing.
+```bash
+npm run build
+npm run preview
+```
+
+Run the configured linter with `npm run lint`.
+
+## Project scope
+
+This is a frontend demonstration project, not the website of an operating business. Medical information, staff profiles, testimonials, and consultation content are illustrative and are not medical advice.
+
